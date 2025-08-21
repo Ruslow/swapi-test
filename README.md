@@ -2,8 +2,8 @@
 
 ## For launching run:
 
-**npm i && npm run dev**
+`npm i && npm run dev`
 
 ## For running tests:
 
-**npm run test**
+`npm run test`
