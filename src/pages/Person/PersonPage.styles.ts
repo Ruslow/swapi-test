@@ -1,4 +1,6 @@
 import { Box, Typography, styled } from "@mui/material";
+import type { BoxProps } from "@mui/material/Box";
+import type { HTMLMotionProps } from "motion/react";
 
 export const ContentWrapper = styled(Box)`
   display: grid;
@@ -31,7 +33,7 @@ export const Title = styled(Typography)`
   text-align: center;
 `;
 
-export const PeopleList = styled(Box)`
+export const PeopleList = styled(Box)<BoxProps & HTMLMotionProps<"div">>`
   display: flex;
   flex-direction: column;
   gap: 16px;

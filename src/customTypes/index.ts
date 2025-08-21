@@ -19,4 +19,11 @@ interface IPerson {
 
 type TPeople = IPerson[];
 
-export type { IPerson, TPeople };
+type ServerListResponse<T> = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T;
+};
+
+export type { IPerson, TPeople, ServerListResponse };

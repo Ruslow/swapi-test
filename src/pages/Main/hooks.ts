@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import { AxiosError } from "axios";
-import type { TPeople } from "@customTypes";
+import type { ServerListResponse, TPeople } from "@customTypes";
 import { getQueryParams } from "@utils";
 import { axiosInstance } from "@axiosInstance";
 
@@ -24,9 +24,10 @@ const usePeople = ({ search, page }: IUsePeopleInterface) => {
       try {
         const params = { page: page.toString(), search };
         const queryParams = getQueryParams(params);
-        // TODO: add base origin url and axios initial
-        // TODO: add response type
-        const { data } = await axiosInstance.get(`people?${queryParams}`);
+
+        const { data } = await axiosInstance.get<ServerListResponse<TPeople>>(
+          `people?${queryParams}`
+        );
 
         setPeople(data.results);
         setPagesCount(data.count);

@@ -34,7 +34,7 @@ const usePerson = (id: string | undefined) => {
       setError("");
 
       try {
-        const { data } = await axiosInstance.get(`people/${id}`);
+        const { data } = await axiosInstance.get<IPerson>(`people/${id}`);
 
         setPerson(data);
       } catch (error) {

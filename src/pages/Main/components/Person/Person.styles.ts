@@ -1,6 +1,7 @@
-import { Box, Card, Typography, styled } from "@mui/material";
+import { Box, Card, Typography, styled, type CardProps } from "@mui/material";
+import type { HTMLMotionProps } from "motion/react";
 
-export const CustomCard = styled(Card)`
+export const CustomCard = styled(Card)<CardProps & HTMLMotionProps<"div">>`
   width: 345px;
   height: 153px;
 `;
