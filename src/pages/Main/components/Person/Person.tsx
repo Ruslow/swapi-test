@@ -1,8 +1,8 @@
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import type { FC } from "react";
-import type { IPerson } from "../../../../types";
-import { snakeCaseToWords } from "../../../../utils/snakeCaseToWords/snakeCaseToWords";
 import { Link } from "react-router";
+import type { IPerson } from "@customTypes";
+import { snakeCaseToWords } from "@utils";
+import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 
 interface PersonProps {
   person: IPerson;
@@ -11,11 +11,11 @@ interface PersonProps {
 export const Person: FC<PersonProps> = ({ person }) => {
   const { name, created, edited, url, homeworld, ...restPerson } = person;
 
-  const spittedUrl = url.split('/');
-  const id = spittedUrl[spittedUrl.length];
+  const spittedUrl = url.split("/");
+  const id = spittedUrl[spittedUrl.length - 2];
 
   return (
-    <Link to={id}>
+    <Link to={`people/${id}`}>
       <Card sx={{ width: 345 }}>
         <CardActionArea>
           <CardContent>

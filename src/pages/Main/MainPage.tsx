@@ -1,11 +1,11 @@
-import { InputAdornment, Pagination, TextField } from "@mui/material";
-import { usePeople, useSearch } from "./hooks";
-import { People } from "./components/People/People";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
-import { useDebounce } from "../../hooks/useDebounce";
-import { usePagination } from "../../hooks/usePagination";
+import { useMemo } from "react";
 import { PaginationWrapper, SearchFormControl } from "./MainPage.styles";
+import { People } from "./components/People";
+import { useDebounce, usePagination } from "@hooks";
+import { usePeople, useSearch } from "./hooks";
+import { InputAdornment, Pagination, TextField } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const MainPage = () => {
   const { search, handleChangeSearch, handleClearSearch } = useSearch();
@@ -18,6 +18,8 @@ export const MainPage = () => {
     search: debouncedSearch,
     page,
   });
+
+  const count = useMemo(() => Math.ceil(pagesCount / 10), [pagesCount]);
 
   return (
     <section>
@@ -52,13 +54,13 @@ export const MainPage = () => {
         refetch={refetch}
       />
 
-      {!error && (
+      {count > 1 && !error && (
         <PaginationWrapper>
           <Pagination
             color="primary"
             page={page}
             onChange={handlePageChange}
-            count={Math.ceil(pagesCount / 10)}
+            count={count}
           />
         </PaginationWrapper>
       )}

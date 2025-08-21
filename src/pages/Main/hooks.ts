@@ -1,8 +1,8 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import { AxiosError } from "axios";
-import type { TPeople } from "../../types";
-import { getQueryParams } from "../../utils/getQueryParams/getQueryParams";
-import { axiosInstance } from "../../axiosInstance";
+import type { TPeople } from "@customTypes";
+import { getQueryParams } from "@utils";
+import { axiosInstance } from "@axiosInstance";
 
 interface IUsePeopleInterface {
   search: string;

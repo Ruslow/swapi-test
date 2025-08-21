@@ -1,4 +1,16 @@
 {
+  "compilerOptions": {
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@": ["src/*"],
+      "@hooks": ["src/hooks/*"],
+      "@utils": ["src/utils/*"],
+      "@pages": ["src/pages/*"],
+      "@customTypes": ["src/customTypes/*"],
+      "@axiosInstance": ["src/axiosInstance/*"]
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

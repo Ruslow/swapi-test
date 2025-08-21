@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { usePerson } from "./hooks";
+import { PersonForm } from "./components/PersonForm";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
-import { PersonForm } from "./components/PersonForm/PersonForm";
 
 export const PersonPage = () => {
   const { id } = useParams();
@@ -49,21 +49,32 @@ export const PersonPage = () => {
   const { name, created, edited, url, homeworld, ...restPerson } = person;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "50vh",
-      }}
-    >
-      {Object.entries(restPerson)
-        .filter(([_, value]) => typeof value === "string")
-        .map(([key, value]) => {
-          return <PersonForm key={key} name={key} value={value as string} />;
-        })}
+    <div>
+      <Typography sx={{ mb: 3, textAlign: "center" }} variant="h4">
+        {name}
+      </Typography>
+
+      <ul
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          height: "50vh",
+        }}
+      >
+        {Object.entries(restPerson)
+          .filter(([_, value]) => typeof value === "string")
+          .map(([key, value]) => {
+            return (
+              <PersonForm
+                key={key}
+                name={key}
+                value={value as string}
+                id={id}
+              />
+            );
+          })}
+      </ul>
     </div>
   );
 };

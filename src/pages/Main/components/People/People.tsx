@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import { Button, CircularProgress, Typography } from "@mui/material";
-import { Person } from "../Person/Person";
-import type { TPeople } from "../../../../types";
 import { CenterWrapper, LoaderWrapper, PeopleWrapper } from "./People.styles";
+import type { TPeople } from "@customTypes";
+import { Person } from "../Person";
+import { Button, CircularProgress, Typography } from "@mui/material";
 
 interface PeopleProps {
   isLoading: boolean;

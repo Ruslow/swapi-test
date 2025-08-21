@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import type { IPerson } from "../../types";
-import { axiosInstance } from "../../axiosInstance";
+import type { IPerson } from "@customTypes";
+import { axiosInstance } from "@axiosInstance";
 
 const usePerson = (id: string | undefined) => {
   const [isLoading, setIsLoading] = useState(false);
