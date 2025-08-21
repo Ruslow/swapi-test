@@ -1,4 +1,4 @@
-import { Box, FormControl, styled } from "@mui/material";
+import { Box, FormControl, InputAdornment, styled } from "@mui/material";
 
 export const SearchFormControl = styled(FormControl)`
   max-width: 800px;
@@ -11,4 +11,8 @@ export const SearchFormControl = styled(FormControl)`
 export const PaginationWrapper = styled(Box)`
   display: flex;
   justify-content: center;
+`;
+
+export const EndInputAdornment = styled(InputAdornment)`
+  cursor: pointer;
 `;

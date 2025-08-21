@@ -3,7 +3,6 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@": ["src/*"],
       "@hooks": ["src/hooks/*"],
       "@utils": ["src/utils/*"],
       "@pages": ["src/pages/*"],

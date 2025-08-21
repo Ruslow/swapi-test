@@ -1,22 +1,12 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
-import { MainPage, PersonPage } from "@pages";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: MainPage,
-  },
-  {
-    path: "/people/:id",
-    Component: PersonPage,
-  },
-]);
+import { RouterProvider } from "react-router";
+import { router } from "./routes";
+import { AppWrapper } from "./App.styles";
 
 function App() {
   return (
-    <div style={{ padding: "16px 30px" }}>
+    <AppWrapper>
       <RouterProvider router={router} />
-    </div>
+    </AppWrapper>
   );
 }
 

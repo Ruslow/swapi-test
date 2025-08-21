@@ -2,7 +2,15 @@ import type { FC } from "react";
 import { Link } from "react-router";
 import type { IPerson } from "@customTypes";
 import { snakeCaseToWords } from "@utils";
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
+import { CardActionArea, CardContent, Typography } from "@mui/material";
+import { AnimatePresence } from "motion/react";
+import * as motion from "motion/react-client";
+import {
+  CustomCard,
+  KeyWrapper,
+  PersonStat,
+  PersonStats,
+} from "./Person.styles";
 
 interface PersonProps {
   person: IPerson;
@@ -15,41 +23,46 @@ export const Person: FC<PersonProps> = ({ person }) => {
   const id = spittedUrl[spittedUrl.length - 2];
 
   return (
-    <Link to={`people/${id}`}>
-      <Card sx={{ width: 345 }}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {name}
-            </Typography>
+    <AnimatePresence mode="wait">
+      <Link to={`people/${id}`}>
+        <CustomCard
+          component={motion.div}
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+        >
+          <CardActionArea>
+            <CardContent>
+              <Typography gutterBottom variant="h5">
+                {name}
+              </Typography>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-              }}
-            >
-              {Object.entries(restPerson)
-                .filter(([_, value]) => typeof value === "string")
-                .map(([key, value]) => {
-                  return (
-                    <div
-                      key={key}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <h4>{snakeCaseToWords(key)}:</h4>
-                      <p>{value}</p>
-                    </div>
-                  );
-                })}
-            </div>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Link>
+              <PersonStats>
+                {Object.entries(restPerson)
+                  .filter(([_, value]) => typeof value === "string")
+                  .map(([key, value]) => {
+                    return (
+                      <PersonStat key={key}>
+                        <KeyWrapper variant="caption">
+                          {snakeCaseToWords(key)}:
+                        </KeyWrapper>
+
+                        <Typography variant="caption">
+                          {value.length > 10
+                            ? `${value.slice(0, 10)}...`
+                            : value}
+                        </Typography>
+                      </PersonStat>
+                    );
+                  })}
+              </PersonStats>
+            </CardContent>
+          </CardActionArea>
+        </CustomCard>
+      </Link>
+    </AnimatePresence>
   );
 };

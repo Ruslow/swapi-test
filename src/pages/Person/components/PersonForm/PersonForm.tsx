@@ -1,9 +1,15 @@
 import { useState, type FC, type ChangeEvent, useRef, useEffect } from "react";
 import { snakeCaseToWords } from "@utils";
-import { FormControl, IconButton, TextField } from "@mui/material";
+import { FormControl, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import { ButtonsWrapper } from "../../PersonPage.styles";
+import {
+  ContentWrapper,
+  KeyValueWrapper,
+  TextInput,
+} from "./PersonForm.styles";
 
 interface PersonFormProps {
   name: string;
@@ -61,10 +67,10 @@ export const PersonForm: FC<PersonFormProps> = ({ name, value, id }) => {
   const nameToWords = snakeCaseToWords(name);
 
   return (
-    <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+    <ContentWrapper>
       {isEditing ? (
         <FormControl>
-          <TextField
+          <TextInput
             label={name}
             name={name}
             placeholder={nameToWords}
@@ -74,11 +80,11 @@ export const PersonForm: FC<PersonFormProps> = ({ name, value, id }) => {
           />
         </FormControl>
       ) : (
-        <div style={{ display: "flex", gap: "32px" }}>
-          <h5>{nameToWords}:</h5>
+        <KeyValueWrapper>
+          <Typography variant="h6">{nameToWords}:</Typography>
 
-          <p>{lastValue.current}</p>
-        </div>
+          <Typography variant="body1">{lastValue.current}</Typography>
+        </KeyValueWrapper>
       )}
 
       {!isEditing ? (
@@ -86,7 +92,7 @@ export const PersonForm: FC<PersonFormProps> = ({ name, value, id }) => {
           <EditIcon />
         </IconButton>
       ) : (
-        <div style={{ display: "flex", gap: "4px" }}>
+        <ButtonsWrapper>
           <IconButton color="success" size="small" onClick={handleConfirm}>
             <CheckIcon />
           </IconButton>
@@ -94,8 +100,8 @@ export const PersonForm: FC<PersonFormProps> = ({ name, value, id }) => {
           <IconButton color="error" size="small" onClick={handleCancel}>
             <CloseIcon />
           </IconButton>
-        </div>
+        </ButtonsWrapper>
       )}
-    </div>
+    </ContentWrapper>
   );
 };

@@ -1,40 +1,34 @@
 import { useParams } from "react-router";
 import { usePerson } from "./hooks";
+import { useTitle } from "@hooks";
 import { PersonForm } from "./components/PersonForm";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
+import * as motion from "motion/react-client";
+import {
+  ContentWrapper,
+  ErrorWrapper,
+  LoaderWrapper,
+  PeopleList,
+  Title,
+} from "./PersonPage.styles";
 
 export const PersonPage = () => {
   const { id } = useParams();
-
   const { isLoading, error, person, refetch } = usePerson(id);
+
+  useTitle(person.name);
 
   if (isLoading) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "calc(100vh - 32px)",
-        }}
-      >
+      <LoaderWrapper>
         <CircularProgress />
-      </Box>
+      </LoaderWrapper>
     );
   }
 
   if (error) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "calc(100vh - 32px)",
-          flexDirection: "column",
-          gap: "16px",
-        }}
-      >
+      <ErrorWrapper>
         <Typography variant="h6" color="error" letterSpacing={1.5}>
           {error}
         </Typography>
@@ -42,25 +36,22 @@ export const PersonPage = () => {
         <Button size="small" variant="contained" onClick={refetch}>
           Try again
         </Button>
-      </Box>
+      </ErrorWrapper>
     );
   }
 
   const { name, created, edited, url, homeworld, ...restPerson } = person;
 
   return (
-    <div>
-      <Typography sx={{ mb: 3, textAlign: "center" }} variant="h4">
+    <ContentWrapper>
+      <Title variant="h4" letterSpacing={2}>
         {name}
-      </Typography>
+      </Title>
 
-      <ul
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-          height: "50vh",
-        }}
+      <PeopleList
+        as={motion.ul}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
       >
         {Object.entries(restPerson)
           .filter(([_, value]) => typeof value === "string")
@@ -74,7 +65,7 @@ export const PersonPage = () => {
               />
             );
           })}
-      </ul>
-    </div>
+      </PeopleList>
+    </ContentWrapper>
   );
 };

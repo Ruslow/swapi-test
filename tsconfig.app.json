@@ -25,7 +25,6 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@": ["src/*"],
       "@hooks": ["src/hooks/index"],
       "@utils": ["src/utils/index"],
       "@pages": ["src/pages/index"],

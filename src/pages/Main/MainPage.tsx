@@ -1,13 +1,19 @@
 import { useMemo } from "react";
-import { PaginationWrapper, SearchFormControl } from "./MainPage.styles";
+import {
+  EndInputAdornment,
+  PaginationWrapper,
+  SearchFormControl,
+} from "./MainPage.styles";
 import { People } from "./components/People";
-import { useDebounce, usePagination } from "@hooks";
+import { useDebounce, usePagination, useTitle } from "@hooks";
 import { usePeople, useSearch } from "./hooks";
 import { InputAdornment, Pagination, TextField } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
 
 export const MainPage = () => {
+  useTitle("Main");
+
   const { search, handleChangeSearch, handleClearSearch } = useSearch();
 
   const debouncedSearch = useDebounce(search, 300);
@@ -29,6 +35,7 @@ export const MainPage = () => {
           size="small"
           variant="outlined"
           placeholder="Поиск"
+          value={search}
           onChange={handleChangeSearch}
           slotProps={{
             input: {
@@ -38,9 +45,9 @@ export const MainPage = () => {
                 </InputAdornment>
               ),
               endAdornment: search ? (
-                <InputAdornment position="end" onClick={handleClearSearch}>
+                <EndInputAdornment position="end" onClick={handleClearSearch}>
                   <ClearIcon />
-                </InputAdornment>
+                </EndInputAdornment>
               ) : null,
             },
           }}

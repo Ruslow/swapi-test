@@ -4,7 +4,8 @@ export const LoaderWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 91vh;
+  min-height: 80.1vh;
+  margin-bottom: 20px;
 `;
 
 export const CenterWrapper = styled(Box)`
@@ -18,8 +19,9 @@ export const CenterWrapper = styled(Box)`
 
 export const PeopleWrapper = styled(Box)`
   display: flex;
-  gap: 30px;
+  gap: 25px;
   flex-wrap: wrap;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 80vh;
+  margin-bottom: 20px;
 `;
