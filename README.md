@@ -1,9 +1,9 @@
 # TEST TASK SWAPI
 
-For launching run:
+## For launching run:
 
 **npm i && npm run dev**
 
-For running tests:
+## For running tests:
 
 **npm run test**
