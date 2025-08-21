@@ -1,7 +1,8 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import type { TPeople } from "../../types";
 import { getQueryParams } from "../../utils/getQueryParams/getQueryParams";
+import { axiosInstance } from "../../axiosInstance";
 
 interface IUsePeopleInterface {
   search: string;
@@ -25,9 +26,7 @@ const usePeople = ({ search, page }: IUsePeopleInterface) => {
         const queryParams = getQueryParams(params);
         // TODO: add base origin url and axios initial
         // TODO: add response type
-        const { data } = await axios.get(
-          `https://swapi.py4e.com/api/people?${queryParams}`
-        );
+        const { data } = await axiosInstance.get(`people?${queryParams}`);
 
         setPeople(data.results);
         setPagesCount(data.count);

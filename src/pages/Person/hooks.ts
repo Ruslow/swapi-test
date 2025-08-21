@@ -1,6 +1,7 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import type { IPerson } from "../../types";
+import { axiosInstance } from "../../axiosInstance";
 
 const usePerson = (id: string | undefined) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,9 +34,7 @@ const usePerson = (id: string | undefined) => {
       setError("");
 
       try {
-        const { data } = await axios.get(
-          `https://swapi.py4e.com/api/people/${id}`
-        );
+        const { data } = await axiosInstance.get(`people/${id}`);
 
         setPerson(data);
       } catch (error) {
