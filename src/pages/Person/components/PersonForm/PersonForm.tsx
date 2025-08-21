@@ -1,4 +1,11 @@
-import { useState, type FC, type ChangeEvent, useRef, useEffect } from "react";
+import {
+  useState,
+  type FC,
+  type ChangeEvent,
+  useRef,
+  useEffect,
+  useMemo,
+} from "react";
 import { snakeCaseToWords } from "@utils";
 import { FormControl, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -64,15 +71,15 @@ export const PersonForm: FC<PersonFormProps> = ({ name, value, id }) => {
     setIsEditing(false);
   };
 
-  const nameToWords = snakeCaseToWords(name);
+  const nameToWords = useMemo(() => snakeCaseToWords(name), [name]);
 
   return (
     <ContentWrapper>
       {isEditing ? (
         <FormControl>
           <TextInput
-            label={name}
-            name={name}
+            label={nameToWords}
+            name={nameToWords}
             placeholder={nameToWords}
             size="small"
             value={inputValue}
