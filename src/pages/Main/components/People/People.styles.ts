@@ -12,7 +12,7 @@ export const CenterWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 82.5vh;
   flex-direction: column;
   gap: 16px;
 `;
