@@ -1,7 +1,8 @@
 import axios from "axios";
+const DEV_URL = import.meta.env.VITE_DEV_URL;
 
 const axiosInstance = axios.create({
-  baseURL: "https://swapi.dev/api/",
+  baseURL: DEV_URL,
 });
 
 export { axiosInstance };
